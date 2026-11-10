@@ -174,7 +174,11 @@ function addToCart(productId) {
 }
 
 function saveCart() {
-  localStorage.setItem("arteonCart", JSON.stringify(cart));
+  try {
+    localStorage.setItem("arteonCart", JSON.stringify(cart));
+  } catch (err) {
+    showToast("Couldn't save your cart - browser storage is full.");
+  }
   updateCartCount();
 }
 
@@ -328,7 +332,7 @@ document.getElementById("pPresAdd").addEventListener("click", () => {
   renderFormPresentation();
 });
 
-function fileToDataUrl(file, maxSize = 900) {
+function fileToDataUrl(file, maxSize = 800) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.onerror = reject;
@@ -341,7 +345,7 @@ function fileToDataUrl(file, maxSize = 900) {
         canvas.width = Math.round(img.width * scale);
         canvas.height = Math.round(img.height * scale);
         canvas.getContext("2d").drawImage(img, 0, 0, canvas.width, canvas.height);
-        resolve(canvas.toDataURL("image/jpeg", 0.8));
+        resolve(canvas.toDataURL("image/jpeg", 0.75));
       };
       img.src = reader.result;
     };
@@ -775,6 +779,7 @@ function refreshShop() {
   renderProducts();
   renderManageList();
   renderOffers();
+  renderBackupInfo();
 }
 
 /* ===== Custom form listeners ===== */
@@ -993,6 +998,100 @@ document.querySelectorAll(".nav-links a").forEach(link => {
     menuToggle.setAttribute("aria-expanded", "false");
   });
 });
+
+/* ===== Backup & restore (data lives in this browser, so keep a copy) ===== */
+const BACKUP_KEYS = ["arteonProducts", "arteonCart", "arteonOffers", "arteonReviews", "bcInbox", "bcLots", "bcOffers"];
+
+const backupBox = document.createElement("section");
+backupBox.className = "backup-box";
+backupBox.innerHTML = `
+  <h3>Backup &amp; restore</h3>
+  <p id="backupInfo" role="status"></p>
+  <p class="backup-help">Download a copy now and then. If this browser's data is ever cleared, or you open the site on another computer, restore it from the file.</p>
+  <div class="backup-actions">
+    <button type="button" id="backupDownload" class="btn btn-light">Download backup</button>
+    <label class="btn btn-light backup-restore">Restore from backup
+      <input id="backupFile" type="file" accept="application/json,.json" class="visually-hidden" />
+    </label>
+  </div>
+`;
+inbox.insertAdjacentElement("afterend", backupBox);
+
+function renderBackupInfo() {
+  const el = document.getElementById("backupInfo");
+  if (!el) return;
+  let chars = 0;
+  try {
+    BACKUP_KEYS.forEach(k => { chars += k.length + (localStorage.getItem(k) || "").length; });
+  } catch (err) { /* storage blocked */ }
+  const mb = chars / 1000000;
+  el.textContent = `${products.length} artwork${products.length === 1 ? "" : "s"} saved in this browser, using about ${mb.toFixed(1)} of roughly 5 MB.` +
+    (mb > 4 ? " Storage is almost full - download a backup and remove some photos." : "");
+}
+
+document.getElementById("backupDownload").addEventListener("click", () => {
+  const data = {};
+  BACKUP_KEYS.forEach(k => {
+    const v = localStorage.getItem(k);
+    if (v !== null) data[k] = v;
+  });
+  const file = JSON.stringify({ app: "arteon", version: 1, savedAt: new Date().toISOString(), data });
+  const url = URL.createObjectURL(new Blob([file], { type: "application/json" }));
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = `arteon-backup-${new Date().toISOString().slice(0, 10)}.json`;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+  showToast("Backup downloaded.");
+});
+
+document.getElementById("backupFile").addEventListener("change", e => {
+  const file = e.target.files[0];
+  e.target.value = "";
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onerror = () => showToast("Couldn't read that file.");
+  reader.onload = () => {
+    let parsed;
+    try { parsed = JSON.parse(reader.result); } catch (err) { showToast("That isn't a valid backup file."); return; }
+    if (!parsed || parsed.app !== "arteon" || !parsed.data || typeof parsed.data !== "object") {
+      showToast("That isn't an ARTEON backup.");
+      return;
+    }
+    const keys = BACKUP_KEYS.filter(k => typeof parsed.data[k] === "string");
+    if (!keys.length) { showToast("That backup is empty."); return; }
+    for (const k of keys) {
+      try { JSON.parse(parsed.data[k]); } catch (err) { showToast("That backup file is damaged."); return; }
+    }
+    if (!confirm("Replace the data in this browser with the backup? This cannot be undone.")) return;
+    const previous = {};
+    BACKUP_KEYS.forEach(k => { previous[k] = localStorage.getItem(k); });
+    try {
+      BACKUP_KEYS.forEach(k => {
+        if (keys.indexOf(k) !== -1) localStorage.setItem(k, parsed.data[k]);
+        else localStorage.removeItem(k);
+      });
+    } catch (err) {
+      try {
+        BACKUP_KEYS.forEach(k => {
+          if (previous[k] === null) localStorage.removeItem(k);
+          else localStorage.setItem(k, previous[k]);
+        });
+      } catch (err2) { /* nothing more we can do */ }
+      showToast("Not enough browser storage to restore that backup.");
+      return;
+    }
+    location.reload();
+  };
+  reader.readAsText(file);
+});
+
+/* Ask the browser not to clear our saved data when it is short on space */
+if (navigator.storage && navigator.storage.persist) {
+  navigator.storage.persist().catch(() => {});
+}
 
 /* ===== Init ===== */
 document.getElementById("year").textContent = new Date().getFullYear();
