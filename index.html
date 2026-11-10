@@ -1,0 +1,1033 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="ARTEON is a marketplace for original handmade paintings and drawings. Buy, bid or make an offer." />
+<meta name="theme-color" content="#292723" />
+<meta name="color-scheme" content="light" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23292723'/%3E%3Ctext x='32' y='46' font-size='40' text-anchor='middle' fill='%23D9A27A' font-family='serif'%3EA%3C/text%3E%3C/svg%3E" />
+<title>ARTEON | Handmade Art Marketplace, Auctions & Offers</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=DM+Sans:wght@400;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css" />
+<style>
+:root { --ivory: #F3EEE4; --charcoal: #292723; --terracotta: #A87858; --sand: #B6A58B; }
+body { background: var(--ivory); color: var(--charcoal); }
+h1, h2, h3, .logo { font-family: 'Playfair Display', serif; }
+.logo .wordmark { font-family: 'Cinzel', 'Playfair Display', serif; font-weight: 800; font-size: 1.6rem; letter-spacing: .18em; line-height: 1.2; background: linear-gradient(90deg, #EBD9BE 0%, #D9A27A 25%, #A87858 50%, #D9A27A 75%, #EBD9BE 100%); background-size: 200% 100%; animation: wordFlow 6s linear infinite; -webkit-background-clip: text; background-clip: text; color: transparent !important; -webkit-text-fill-color: transparent; display: inline-block; }
+.footer-logo .wordmark { font-size: 1.4rem; }
+@keyframes wordFlow { from { background-position: 0% 0; } to { background-position: 200% 0; } }
+@keyframes floatFrame { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+@keyframes spinRing { to { transform: rotate(360deg); } }
+@keyframes shimmer { 0% { transform: translateX(-120%) skewX(-20deg); } 60%, 100% { transform: translateX(260%) skewX(-20deg); } }
+@keyframes riseLetter { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes pulseDot { 0%, 100% { opacity: .3; transform: scale(.8); } 50% { opacity: 1; transform: scale(1.2); } }
+.brand-stage { position: relative; display: flex; align-items: center; justify-content: center; min-height: 380px; }
+.brand-ring { position: absolute; width: min(380px, 90%); aspect-ratio: 1; border-radius: 50%; border: 1px dashed var(--terracotta); animation: spinRing 40s linear infinite; opacity: .6; }
+.brand-ring::before, .brand-ring::after { content: ''; position: absolute; width: 12px; height: 12px; border-radius: 50%; background: var(--terracotta); top: -6px; left: calc(50% - 6px); }
+.brand-ring::after { top: auto; bottom: -6px; background: var(--sand); }
+.brand-frame { position: relative; overflow: hidden; background: var(--charcoal); padding: 14px; border: 2px solid var(--sand); box-shadow: 0 18px 40px rgba(41,39,35,.25); animation: floatFrame 6s ease-in-out infinite; max-width: 100%; }
+.brand-frame-inner { position: relative; overflow: hidden; border: 1px solid var(--terracotta); padding: 44px 30px 34px; text-align: center; }
+.brand-frame-inner::after { content: ''; position: absolute; top: 0; bottom: 0; left: 0; width: 40%; background: linear-gradient(90deg, transparent, rgba(255,255,255,.18), transparent); animation: shimmer 5s ease-in-out infinite; pointer-events: none; }
+.brand-name { margin: 0; display: flex; justify-content: center; font-family: 'Cinzel', 'Playfair Display', serif; font-weight: 800; font-size: clamp(2.2rem, 6vw, 3.6rem); letter-spacing: .12em; line-height: 1.1; }
+.brand-name span { display: inline-block; background: linear-gradient(90deg, #EBD9BE 0%, #D9A27A 25%, #A87858 50%, #D9A27A 75%, #EBD9BE 100%); background-size: 300% 100%; -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; opacity: 0; animation: riseLetter .8s ease forwards, wordFlow 7s linear infinite; }
+.brand-name span:nth-child(1) { animation-delay: .1s, 0s; }
+.brand-name span:nth-child(2) { animation-delay: .25s, .3s; }
+.brand-name span:nth-child(3) { animation-delay: .4s, .6s; }
+.brand-name span:nth-child(4) { animation-delay: .55s, .9s; }
+.brand-name span:nth-child(5) { animation-delay: .7s, 1.2s; }
+.brand-name span:nth-child(6) { animation-delay: .85s, 1.5s; }
+.brand-rule { width: 70%; height: 1px; margin: 18px auto 12px; background: linear-gradient(90deg, transparent, var(--sand), transparent); }
+.brand-tag { margin: 0; color: var(--sand); font-size: .72rem; letter-spacing: .3em; text-transform: uppercase; }
+.brand-dots { display: flex; justify-content: center; gap: 8px; margin-top: 14px; }
+.brand-dots i { width: 6px; height: 6px; border-radius: 50%; background: var(--terracotta); animation: pulseDot 2s ease-in-out infinite; }
+.brand-dots i:nth-child(2) { animation-delay: .3s; }
+.brand-dots i:nth-child(3) { animation-delay: .6s; }
+@media (prefers-reduced-motion: reduce) {
+  .logo .wordmark, .brand-ring, .brand-frame, .brand-frame-inner::after, .brand-name span, .brand-dots i { animation: none !important; opacity: 1; }
+}
+.site-header { background: var(--charcoal) !important; }
+.site-header .logo, .site-header .nav-links a, .site-header .cart-btn { color: var(--ivory) !important; }
+.site-header .nav-links a { opacity: 1; visibility: visible; }
+.site-header .menu-toggle { color: var(--ivory) !important; background: transparent !important; border: 1px solid var(--sand) !important; border-radius: 2px; }
+.site-header .cart-btn { background: transparent !important; border: 1px solid var(--sand) !important; border-radius: 2px; }
+.hero { background: var(--ivory); color: var(--charcoal); border-bottom: 1px solid var(--sand); }
+.hero .eyebrow, .hero h1 em { color: var(--terracotta); }
+.hero h1, .hero-text { color: var(--charcoal); text-shadow: none; }
+.eyebrow { color: var(--terracotta); letter-spacing: .14em; }
+.btn-primary { background: var(--terracotta) !important; color: var(--ivory) !important; border-radius: 2px; text-transform: uppercase; letter-spacing: .08em; font-size: .8rem; }
+.btn-light { border-radius: 2px; text-transform: uppercase; letter-spacing: .08em; font-size: .8rem; }
+.occasion-strip { background: var(--charcoal); color: var(--sand); }
+.custom-section, .about-section { background: var(--ivory); }
+.page-hidden { display: none !important; }
+.nav-wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+@media (min-width: 1025px) {
+  .nav-wrap .nav-links { margin-left: auto; margin-right: 12px; display: flex; align-items: center; gap: 22px; }
+}
+.nav-links a[aria-current="page"] { font-weight: 800; text-decoration: underline; text-underline-offset: 6px; text-decoration-color: var(--terracotta); }
+.container { width: 100%; max-width: 1180px; margin-left: auto; margin-right: auto; padding-left: 20px; padding-right: 20px; box-sizing: border-box; }
+#main { min-height: 70vh; }
+#main > section { margin-top: 0; margin-bottom: 0; }
+#shop, #custom, #about, #reviews, #contact, #manage, #auctions { padding-top: 60px; padding-bottom: 60px; }
+.section-heading { margin-bottom: 28px; }
+.footer { margin-top: 40px; background: var(--charcoal); color: var(--ivory); }
+.footer a { color: var(--sand); }
+.inbox-section { padding: 60px 0; }
+.inbox-day { margin: 28px 0 10px; font-size: 1.15rem; }
+.inbox-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+.inbox-item { background: #fff; border: 1px solid var(--sand); border-radius: 2px; padding: 14px 16px; }
+.inbox-item header { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 6px; }
+.inbox-badge { font-size: .75rem; font-weight: 800; text-transform: uppercase; letter-spacing: .05em; }
+.inbox-item p { margin: 2px 0; white-space: pre-line; }
+.inbox-empty { margin-top: 24px; }
+.auction-section { background: var(--ivory); }
+.lot-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; margin-top: 24px; }
+.lot-card { background: #fff; border: 1px solid var(--sand); border-radius: 2px; padding: 20px; display: flex; flex-direction: column; gap: 8px; }
+.lot-card h3 { margin: 0; font-size: 1.2rem; }
+.lot-card p { margin: 0; }
+.lot-medium { font-size: .75rem; text-transform: uppercase; letter-spacing: .12em; color: var(--terracotta); font-weight: 700; }
+.lot-stats { display: grid; gap: 4px; border-top: 1px solid var(--sand); border-bottom: 1px solid var(--sand); padding: 10px 0; margin: 6px 0; font-size: .92rem; }
+.lot-stats strong { font-size: 1.2rem; }
+.lot-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: auto; }
+.lot-actions .btn { flex: 1; text-align: center; cursor: pointer; }
+.lot-actions .btn[disabled] { opacity: .45; cursor: not-allowed; }
+.lot-status { font-size: .75rem; font-weight: 800; text-transform: uppercase; letter-spacing: .08em; color: var(--charcoal); }
+.track-box { background: #fff; border: 1px solid var(--sand); border-radius: 2px; padding: 16px; margin-top: 8px; }
+.track-form { display: flex; gap: 8px; flex-wrap: wrap; }
+.track-form input { flex: 1; min-width: 200px; padding: 10px; border: 1px solid var(--sand); border-radius: 2px; font: inherit; background: var(--ivory); color: var(--charcoal); }
+.auction-note { margin-top: 12px; font-weight: 600; min-height: 1.2em; }
+.offer-row { border-top: 1px solid var(--sand); padding: 10px 0; display: grid; gap: 4px; }
+.offer-row:first-child { border-top: 0; }
+.offer-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 6px; }
+.mini-btn { border: 1px solid var(--charcoal); background: transparent; color: var(--charcoal); padding: 6px 12px; border-radius: 2px; font: inherit; font-size: .75rem; text-transform: uppercase; letter-spacing: .08em; cursor: pointer; }
+.mini-btn.accept { background: var(--charcoal); color: var(--ivory); }
+.mini-btn.reject { border-color: var(--terracotta); color: var(--terracotta); }
+.offer-heading { margin: 40px 0 10px; font-size: 1.4rem; }
+@media (max-width: 900px) {
+  #shop, #custom, #about, #reviews, #contact, #manage, #auctions, .inbox-section { padding-top: 40px; padding-bottom: 40px; }
+  .site-header .nav-links { background: var(--charcoal) !important; border-top: 1px solid var(--sand); }
+  .logo .wordmark { font-size: 1.35rem; }
+  .brand-stage { min-height: 300px; }
+  .brand-frame-inner { padding: 32px 18px 26px; }
+}
+@media (max-width: 1024px) {
+  .site-header .nav-links { background: var(--charcoal) !important; border-top: 1px solid var(--sand); }
+}
+</style>
+</head>
+<body>
+<noscript><p style="padding:20px;text-align:center;background:#F3EEE4;color:#292723">ARTEON needs JavaScript turned on to show the gallery.</p></noscript>
+
+<a href="#main" class="skip-link">Skip to main content</a>
+
+<header class="site-header" role="banner">
+  <div class="container nav-wrap">
+    <a href="#home" class="logo" aria-label="ARTEON home">
+      <span class="wordmark">ARTEON</span>
+    </a>
+
+    <nav id="primaryNav" class="nav-links" aria-label="Primary">
+      <a href="#home">Home</a>
+      <a href="#shop">Shop</a>
+      <a href="#auctions">Auctions</a>
+      <a href="#custom">Commission</a>
+      <a href="#about">About</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#contact">Contact</a>
+      <a href="#inbox" id="inboxLink" style="display:none">Inbox</a>
+      <a href="#manage" id="sellerLink">Seller Login</a>
+    </nav>
+
+    <button class="menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="primaryNav">☰</button>
+
+    <button id="cartButton" class="cart-btn" aria-label="Open cart">
+      🛍 Cart <span id="cartCount" aria-live="polite">0</span>
+    </button>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- HERO -->
+  <section id="home" class="hero" aria-labelledby="heroTitle">
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow">A HANDMADE ART MARKETPLACE</p>
+        <h1 id="heroTitle">Original paintings and drawings, <em>bought, bid on or offered for.</em></h1>
+        <p class="hero-text">
+          ARTEON brings together an online gallery, an auction house and a marketplace for traditional art.
+          Buy a piece at its listed price, place a bid on an auction lot, or submit your own offer.
+          The artist decides whether to accept, decline or negotiate.
+        </p>
+        <div class="hero-actions">
+          <a href="#shop" class="btn btn-primary">Shop artworks</a>
+          <a href="#auctions" class="btn btn-light">Bid &amp; make offers</a>
+        </div>
+
+        <div class="trust-row" role="list">
+          <div role="listitem"><strong>100%</strong><span>Handmade</span></div>
+          <div role="listitem"><strong>3 ways</strong><span>Buy, bid, offer</span></div>
+          <div role="listitem"><strong>Artist</strong><span>Decides the price</span></div>
+        </div>
+      </div>
+
+      <div class="hero-art" aria-hidden="true">
+        <div class="brand-stage">
+          <div class="brand-ring"></div>
+          <div class="brand-frame">
+            <div class="brand-frame-inner">
+              <p class="brand-name"><span>A</span><span>R</span><span>T</span><span>E</span><span>O</span><span>N</span></p>
+              <div class="brand-rule"></div>
+              <p class="brand-tag">Handmade</p>
+              <div class="brand-dots"><i></i><i></i><i></i></div>
+            </div>
+          </div>
+        </div>
+       
+      
+      </div>
+    </div>
+  </section>
+
+  <!-- OCCASIONS STRIP -->
+  <div id="occasions" class="occasion-strip" aria-label="Perfect for">
+    <div class="container">
+      <p>Perfect for</p>
+      <ul class="occasion-list">
+        <li>✦ Home decor</li><li>✦ Gifts</li><li>✦ Collectors</li>
+        <li>✦ Portraits</li><li>✦ Landscapes</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- SHOP -->
+  <section id="shop" class="section" aria-labelledby="shopTitle">
+    <div class="container">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">THE COLLECTION</p>
+          <h2 id="shopTitle">Choose a painting or drawing</h2>
+        </div>
+        <p>Original traditional pieces at fixed prices, ready to bring character to your space.</p>
+      </div>
+
+      <div id="filterRow" class="filter-row" role="tablist" aria-label="Filter artworks"></div>
+
+      <div id="productGrid" class="product-grid" role="list"></div>
+    </div>
+  </section>
+
+  <!-- AUCTIONS & OFFERS -->
+  <section id="auctions" class="auction-section" aria-labelledby="auctionsTitle">
+    <div class="container">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">AUCTIONS &amp; OFFERS</p>
+          <h2 id="auctionsTitle">Bid on a work, or name your price</h2>
+        </div>
+        <p>Place a bid before an auction closes, or submit an offer to the artist, who may accept, decline or reply with a counter-offer.</p>
+      </div>
+
+      <div class="track-box">
+        <p><strong>Track your bids and offers</strong></p>
+        <form id="trackForm" class="track-form" aria-label="Track my bids and offers">
+          <label class="visually-hidden" for="trackEmail">Your email</label>
+          <input id="trackEmail" type="email" placeholder="Email used when bidding" required />
+          <button type="submit" class="btn btn-light">Check status</button>
+        </form>
+        <div id="trackResults"></div>
+      </div>
+      <p id="auctionNote" class="auction-note" role="status" aria-live="polite"></p>
+
+      <div id="lotGrid" class="lot-grid" role="list"></div>
+    </div>
+  </section>
+
+  <!-- INBOX (seller only) -->
+  <section id="inbox" class="inbox-section" aria-labelledby="inboxTitle" style="display:none">
+    <div class="container">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">ARTIST DESK</p>
+          <h2 id="inboxTitle">Bids, offers, messages &amp; orders</h2>
+        </div>
+        <p>Review bids and offers and respond to each. Messages and orders are grouped by day below.</p>
+      </div>
+      <h3 class="offer-heading">Bids &amp; offers</h3>
+      <div id="offerList"></div>
+      <h3 class="offer-heading">Messages &amp; orders</h3>
+      <div id="inboxList"></div>
+    </div>
+  </section>
+
+  <!-- MANAGE PRODUCTS (seller only) -->
+  <section id="manage" class="manage-section" aria-labelledby="manageTitle" style="display:none">
+    <div class="container">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">ARTIST DESK</p>
+          <h2 id="manageTitle">Add your artworks</h2>
+        </div>
+        <p>Upload a photo of your painting or drawing, set the name, price and stock, and it appears in the shop instantly. Everything is saved in this browser.</p>
+      </div>
+
+      <div class="manage-grid">
+        <form id="productForm" class="custom-form" aria-label="Add or edit artwork">
+          <input type="hidden" id="editId" value="" />
+
+          <div class="form-group">
+            <label for="pName">Artwork name</label>
+            <input id="pName" type="text" maxlength="40" placeholder="e.g. Harbor at Dusk" required />
+          </div>
+
+          <div class="two-col">
+            <div class="form-group">
+              <label for="pPrice">Price (₱)</label>
+              <input id="pPrice" type="number" min="1" step="1" placeholder="450" required />
+            </div>
+            <div class="form-group">
+              <label for="pStock">Stock available</label>
+              <input id="pStock" type="number" min="0" step="1" value="10" placeholder="10" required />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="pCategory">Category</label>
+            <input id="pCategory" type="text" list="categoryList" maxlength="20" placeholder="painting, drawing, sketch…" required />
+            <datalist id="categoryList"></datalist>
+          </div>
+
+          <div class="form-group">
+            <label for="pTag">Label <small>(optional)</small></label>
+            <input id="pTag" type="text" maxlength="16" placeholder="New, Original…" />
+          </div>
+
+          <div class="form-group">
+            <label for="pDesc">Description</label>
+            <textarea id="pDesc" rows="3" maxlength="120" placeholder="Medium (oil, acrylic, pencil…), size, and a short description" required></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="pImage">Artwork photo</label>
+            <input id="pImage" type="file" accept="image/*" />
+            <div id="imagePreview" class="image-preview" hidden>
+              <img id="imagePreviewImg" alt="Selected artwork photo preview" />
+              <button type="button" id="removeImage" class="link-btn">Remove photo</button>
+            </div>
+          </div>
+
+          <button type="submit" id="productSubmit" class="btn btn-primary full">Add artwork</button>
+          <button type="button" id="cancelEdit" class="btn btn-light full" hidden>Cancel editing</button>
+        </form>
+
+        <div>
+          <h3 class="manage-subtitle">Your artworks <span id="productCount"></span></h3>
+          <ul id="manageList" class="manage-list"></ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CUSTOMIZE -->
+  <section id="custom" class="custom-section" aria-labelledby="customTitle">
+    <div class="container custom-grid">
+      <div>
+        <p class="eyebrow">COMMISSIONS</p>
+        <h2 id="customTitle">Commission your own painting or drawing.</h2>
+        <p class="muted">
+          Pick your traditional medium, size, finish, accent color, and extras. The total updates
+          automatically so you can request a hand-made piece that fits your idea and budget.
+        </p>
+
+        <form id="customForm" class="custom-form" aria-label="Custom artwork builder">
+          <div class="form-group">
+            <label for="flower">Art medium</label>
+            <select id="flower">
+              <option value="Rose">Oil painting — ₱150</option>
+              <option value="Tulip">Acrylic painting — ₱130</option>
+              <option value="Sunflower">Watercolor — ₱120</option>
+              <option value="Daisy">Pencil / charcoal drawing — ₱100</option>
+            </select>
+          </div>
+
+          <div class="two-col">
+            <div class="form-group">
+              <label for="size">Artwork size</label>
+              <select id="size">
+                <option data-price="80">Small — +₱80</option>
+                <option data-price="150" selected>Medium — +₱150</option>
+                <option data-price="250">Large — +₱250</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="wrap">Finish</label>
+              <select id="wrap">
+                <option value="Kraft">Matte — +₱30</option>
+                <option value="Pastel">Glossy — +₱45</option>
+                <option value="Premium" selected>Varnished — +₱70</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label id="ribbonLabel">Accent color</label>
+            <input type="hidden" id="ribbon" value="Blush Pink" />
+            <div class="swatches" role="radiogroup" aria-labelledby="ribbonLabel">
+              <button type="button" class="swatch active" data-color="Blush Pink" aria-label="Blush Pink" role="radio" aria-checked="true"></button>
+              <button type="button" class="swatch white" data-color="White" aria-label="White" role="radio" aria-checked="false"></button>
+              <button type="button" class="swatch purple" data-color="Lavender" aria-label="Lavender" role="radio" aria-checked="false"></button>
+              <button type="button" class="swatch red" data-color="Red" aria-label="Red" role="radio" aria-checked="false"></button>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Extras</label>
+            <div class="addons">
+              <label class="check-item">
+                <input type="checkbox" data-addon="Wooden frame" data-price="100" />
+                <span>Wooden frame <b>+₱100</b></span>
+              </label>
+              <label class="check-item">
+                <input type="checkbox" data-addon="Gift packaging" data-price="120" />
+                <span>Gift packaging <b>+₱120</b></span>
+              </label>
+              <label class="check-item">
+                <input type="checkbox" data-addon="Signed certificate" data-price="40" />
+                <span>Signed certificate <b>+₱40</b></span>
+              </label>
+            </div>
+          </div>
+
+          <div class="price-box">
+            <span>Estimated total</span>
+            <strong id="customTotal">₱370</strong>
+          </div>
+
+          <button type="submit" class="btn btn-primary full">Add custom artwork to cart</button>
+        </form>
+      </div>
+
+      <aside class="custom-preview" aria-label="Artwork preview">
+        <div class="preview-painting" aria-hidden="true">🖼️ 🖌️ 🖼️ ✏️</div>
+        <div id="previewWrap" class="preview-wrap">Varnished finish</div>
+        <div class="preview-info">
+          <p class="eyebrow">YOUR DESIGN</p>
+          <h3 id="previewTitle">Medium Blush Pink Artwork</h3>
+          <p id="previewDetails">Oil painting • Varnished finish • Blush Pink accent</p>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" class="about-section" aria-labelledby="aboutTitle">
+    <div class="container">
+      <div class="section-heading centered" style="justify-content:center;text-align:center;">
+        <div>
+          <p class="eyebrow">WHY ARTEON</p>
+          <h2 id="aboutTitle">Handmade art, fairly priced between artist and collector.</h2>
+        </div>
+      </div>
+      <div class="about-grid">
+        <article class="about-card">
+          <div class="about-icon" aria-hidden="true">🖌️</div>
+          <h3>Traditional only</h3>
+          <p>Every painting and drawing is made with real brushes, pencils and paper or canvas, never digitally.</p>
+        </article>
+        <article class="about-card">
+          <div class="about-icon" aria-hidden="true">⚖</div>
+          <h3>Bid or offer</h3>
+          <p>Buy at the listed price, bid in an auction, or propose your own price. The artist accepts, declines or counters.</p>
+        </article>
+        <article class="about-card">
+          <div class="about-icon" aria-hidden="true">✦</div>
+          <h3>Made to order</h3>
+          <p>Commission a piece by choosing the medium, size, finish, and extras.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- REVIEWS -->
+  <section id="reviews" class="review-section" aria-labelledby="reviewsTitle">
+    <div class="container">
+      <div class="section-heading centered" style="justify-content:center;text-align:center;">
+        <div>
+          <p class="eyebrow">TESTIMONIALS</p>
+          <h2 id="reviewsTitle">What our collectors say</h2>
+        </div>
+      </div>
+      <div class="review-grid">
+        <article class="review">
+          <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <p>“The painting looked even better in person. You can see every brushstroke!”</p>
+          <strong>— Mia R.</strong>
+        </article>
+        <article class="review">
+          <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <p>“I loved that I could commission a custom hand-painted piece with a frame.”</p>
+          <strong>— Alex P.</strong>
+        </article>
+        <article class="review">
+          <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <p>“Perfect gift. The pencil drawing is detailed and thoughtfully made.”</p>
+          <strong>— Jamie C.</strong>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="contact-section" aria-labelledby="contactTitle">
+    <div class="container contact-grid">
+      <div>
+        <p class="eyebrow">CORRESPONDENCE</p>
+        <h2 id="contactTitle">Let's discuss your next piece.</h2>
+        <p class="muted">For commissions, bulk orders, and business inquiries, send us a message.</p>
+      </div>
+      <form id="contactForm" class="contact-form" aria-label="Contact form">
+        <label class="visually-hidden" for="contactName">Your name</label>
+        <input id="contactName" type="text" placeholder="Your name" required />
+        <label class="visually-hidden" for="contactEmail">Your email</label>
+        <input id="contactEmail" type="email" placeholder="Your email" required />
+        <label class="visually-hidden" for="contactMessage">Your message</label>
+        <textarea id="contactMessage" rows="5" placeholder="Your message" required></textarea>
+        <button type="submit" class="btn btn-primary">Send message</button>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer class="footer" role="contentinfo">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="logo footer-logo">
+          <span class="wordmark">ARTEON</span>
+        </div>
+        <p>A marketplace for original handmade art.</p>
+      </div>
+      <div>
+        <h4>Shop</h4>
+        <a href="#shop">Artworks</a>
+        <a href="#auctions">Auctions &amp; offers</a>
+        <a href="#custom">Commissions</a>
+      </div>
+      <div>
+        <h4>Business</h4>
+        <a href="#about">About us</a>
+        <a href="#reviews">Reviews</a>
+        <a href="#contact">Contact</a>
+        <a href="#home" id="sellerLogout" style="display:none">Seller log out</a>
+      </div>
+    </div>
+    <p class="copyright">© <span id="year"></span> ARTEON. Student business project.</p>
+  </div>
+</footer>
+
+<!-- BID / OFFER MODAL -->
+<div id="bidModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="bidTitle">
+  <div class="modal-card">
+    <button id="closeBid" class="modal-close" aria-label="Close">×</button>
+    <h2 id="bidTitle">PLACE A BID</h2>
+    <p id="bidSubtitle" class="eyebrow"></p>
+    <form id="bidForm" class="checkout-form">
+      <label class="visually-hidden" for="bidName">Full name</label>
+      <input id="bidName" type="text" placeholder="Full name" required />
+      <label class="visually-hidden" for="bidEmail">Email</label>
+      <input id="bidEmail" type="email" placeholder="Email" required />
+      <label class="visually-hidden" for="bidAmount">Amount in pesos</label>
+      <input id="bidAmount" type="number" min="1" step="1" placeholder="Amount (₱)" required />
+      <label class="visually-hidden" for="bidMessage">Note to the artist</label>
+      <textarea id="bidMessage" rows="3" maxlength="200" placeholder="Note to the artist (optional)"></textarea>
+      <p id="bidError" role="alert"></p>
+      <button type="submit" id="bidSubmit" class="btn btn-primary full">Submit bid</button>
+    </form>
+  </div>
+</div>
+
+<!-- CART MODAL -->
+<div id="cartModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="cartTitle">
+  <div class="modal-card">
+    <button id="closeCart" class="modal-close" aria-label="Close cart">×</button>
+    <h2 id="cartTitle">YOUR CART</h2>
+    <p class="eyebrow">Order summary</p>
+    <div id="cartItems" class="cart-items"></div>
+    <div class="cart-total">
+      <span>Total</span>
+      <strong id="cartTotal">₱0</strong>
+    </div>
+    <button id="checkoutButton" class="btn btn-primary full">Proceed to checkout</button>
+  </div>
+</div>
+
+<!-- CHECKOUT MODAL -->
+<div id="checkoutModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="checkoutTitle">
+  <div class="modal-card">
+    <button id="closeCheckout" class="modal-close" aria-label="Close checkout">×</button>
+    <h2 id="checkoutTitle">CHECKOUT</h2>
+    <p class="eyebrow">Complete your order</p>
+    <form id="checkoutForm" class="checkout-form">
+      <label class="visually-hidden" for="checkoutName">Full name</label>
+      <input id="checkoutName" type="text" placeholder="Full name" required />
+      <label class="visually-hidden" for="checkoutEmail">Email</label>
+      <input id="checkoutEmail" type="email" placeholder="Email" required />
+      <label class="visually-hidden" for="checkoutPhone">Phone</label>
+      <input id="checkoutPhone" type="tel" placeholder="Phone" required />
+      <label class="visually-hidden" for="checkoutAddress">Address</label>
+      <textarea id="checkoutAddress" rows="3" placeholder="Delivery address" required></textarea>
+      <button type="submit" class="btn btn-primary full">Place order</button>
+    </form>
+  </div>
+</div>
+
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+<script src="script.js"></script>
+<script>
+(function () {
+  var PASSCODE = '121623';
+  var KEY = 'bcSeller';
+  var INBOX_KEY = 'bcInbox';
+  var LOTS_KEY = 'bcLots';
+  var OFFERS_KEY = 'bcOffers';
+  var manage = document.getElementById('manage');
+  var inbox = document.getElementById('inbox');
+  var link = document.getElementById('sellerLink');
+  var inboxLink = document.getElementById('inboxLink');
+  var logout = document.getElementById('sellerLogout');
+
+  function isSeller() { return sessionStorage.getItem(KEY) === '1'; }
+
+  function load(key) {
+    try { return JSON.parse(localStorage.getItem(key)) || []; } catch (e) { return []; }
+  }
+
+  function save(key, value) {
+    try { localStorage.setItem(key, JSON.stringify(value)); } catch (e) {}
+  }
+
+  function loadInbox() { return load(INBOX_KEY); }
+
+  function saveEntry(entry) {
+    var list = loadInbox();
+    list.push(entry);
+    save(INBOX_KEY, list);
+  }
+
+  function val(id) {
+    var el = document.getElementById(id);
+    return el ? el.value.trim() : '';
+  }
+
+  function peso(n) { return '\u20B1' + Number(n).toLocaleString(); }
+
+  function el(tag, cls, text) {
+    var n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (text !== undefined) n.textContent = text;
+    return n;
+  }
+
+  document.addEventListener('submit', function (e) {
+    var now = new Date().toISOString();
+    if (e.target.id === 'contactForm') {
+      saveEntry({
+        type: 'message',
+        date: now,
+        name: val('contactName'),
+        email: val('contactEmail'),
+        message: val('contactMessage')
+      });
+    } else if (e.target.id === 'checkoutForm') {
+      var items = document.getElementById('cartItems');
+      var total = document.getElementById('cartTotal');
+      saveEntry({
+        type: 'order',
+        date: now,
+        name: val('checkoutName'),
+        email: val('checkoutEmail'),
+        phone: val('checkoutPhone'),
+        address: val('checkoutAddress'),
+        items: items ? (items.innerText || items.textContent).replace(/[ \t]+/g, ' ').replace(/\n\s*\n+/g, '\n').trim() : '',
+        total: total ? total.textContent.trim() : ''
+      });
+    }
+  }, true);
+
+  function addLine(parent, label, text) {
+    if (!text) return;
+    var p = document.createElement('p');
+    var b = document.createElement('strong');
+    b.textContent = label + ': ';
+    p.appendChild(b);
+    p.appendChild(document.createTextNode(text));
+    parent.appendChild(p);
+  }
+
+  function renderInbox() {
+    var box = document.getElementById('inboxList');
+    box.innerHTML = '';
+    var list = loadInbox().slice().sort(function (a, b) { return new Date(b.date) - new Date(a.date); });
+    if (!list.length) {
+      var empty = document.createElement('p');
+      empty.className = 'muted inbox-empty';
+      empty.textContent = 'No messages or orders yet.';
+      box.appendChild(empty);
+      return;
+    }
+    var lastDay = null, ul = null;
+    list.forEach(function (it) {
+      var d = new Date(it.date);
+      var day = d.toLocaleDateString(undefined, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+      if (day !== lastDay) {
+        var h = document.createElement('h3');
+        h.className = 'inbox-day';
+        h.textContent = day;
+        box.appendChild(h);
+        ul = document.createElement('ul');
+        ul.className = 'inbox-list';
+        box.appendChild(ul);
+        lastDay = day;
+      }
+      var li = document.createElement('li');
+      li.className = 'inbox-item';
+      var head = document.createElement('header');
+      var badge = document.createElement('span');
+      badge.className = 'inbox-badge';
+      badge.textContent = it.type === 'order' ? '\u{1F6CD}️ Order' : '✉ Message';
+      var time = document.createElement('time');
+      time.dateTime = it.date;
+      time.textContent = d.toLocaleString();
+      head.appendChild(badge);
+      head.appendChild(time);
+      li.appendChild(head);
+      addLine(li, 'Name', it.name);
+      addLine(li, 'Email', it.email);
+      if (it.type === 'order') {
+        addLine(li, 'Phone', it.phone);
+        addLine(li, 'Address', it.address);
+        addLine(li, 'Items', it.items);
+        addLine(li, 'Total', it.total);
+      } else {
+        addLine(li, 'Message', it.message);
+      }
+      ul.appendChild(li);
+    });
+  }
+
+  /* ---------- Auctions, bids and offers ---------- */
+
+  function seedLots() {
+    var lots = load(LOTS_KEY);
+    if (lots.length) return lots;
+    var day = 86400000, now = Date.now();
+    lots = [
+      { id: 'lot1', title: 'Harbor at Dusk', medium: 'Oil on canvas', desc: 'A 60 x 80 cm oil painting of a quiet harbor in fading light.', start: 1500, asking: 4200, endsAt: now + 7 * day, status: 'open' },
+      { id: 'lot2', title: 'Study of Hands', medium: 'Charcoal on paper', desc: 'A detailed charcoal drawing, 40 x 50 cm, signed by the artist.', start: 600, asking: 1800, endsAt: now + 5 * day, status: 'open' },
+      { id: 'lot3', title: 'Market Morning', medium: 'Watercolor', desc: 'A loose watercolor of a morning market, 30 x 40 cm.', start: 800, asking: 2500, endsAt: now + 10 * day, status: 'open' }
+    ];
+    save(LOTS_KEY, lots);
+    return lots;
+  }
+
+  function lotById(id) {
+    return seedLots().filter(function (l) { return l.id === id; })[0];
+  }
+
+  function bidsFor(lotId) {
+    return load(OFFERS_KEY).filter(function (o) { return o.lotId === lotId && o.kind === 'bid' && o.status !== 'rejected'; });
+  }
+
+  function highestBid(lotId) {
+    var max = 0;
+    bidsFor(lotId).forEach(function (b) { if (b.amount > max) max = b.amount; });
+    return max;
+  }
+
+  function timeLeft(ms) {
+    if (ms <= 0) return 'Closed';
+    var d = Math.floor(ms / 86400000);
+    var h = Math.floor((ms % 86400000) / 3600000);
+    var m = Math.floor((ms % 3600000) / 60000);
+    if (d > 0) return d + 'd ' + h + 'h left';
+    if (h > 0) return h + 'h ' + m + 'm left';
+    return m + 'm left';
+  }
+
+  var activeLot = null, activeKind = 'bid';
+  var bidModal = document.getElementById('bidModal');
+
+  function openBid(lotId, kind) {
+    var lot = lotById(lotId);
+    if (!lot) return;
+    activeLot = lot;
+    activeKind = kind;
+    var high = highestBid(lot.id);
+    var min = high ? high + 1 : lot.start;
+    document.getElementById('bidTitle').textContent = kind === 'bid' ? 'PLACE A BID' : 'MAKE AN OFFER';
+    document.getElementById('bidSubtitle').textContent = lot.title + (kind === 'bid' ? ' \u2022 minimum bid ' + peso(min) : ' \u2022 asking ' + peso(lot.asking));
+    document.getElementById('bidSubmit').textContent = kind === 'bid' ? 'Submit bid' : 'Submit offer';
+    document.getElementById('bidAmount').min = kind === 'bid' ? min : 1;
+    document.getElementById('bidAmount').placeholder = 'Amount (\u20B1)';
+    document.getElementById('bidError').textContent = '';
+    document.getElementById('bidForm').reset();
+    bidModal.classList.remove('hidden');
+    document.getElementById('bidName').focus();
+  }
+
+  function closeBid() { bidModal.classList.add('hidden'); }
+
+  document.getElementById('closeBid').addEventListener('click', closeBid);
+  bidModal.addEventListener('click', function (e) { if (e.target === bidModal) closeBid(); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeBid(); });
+
+  document.getElementById('bidForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (!activeLot) return;
+    var lot = lotById(activeLot.id);
+    var amount = Math.round(Number(val('bidAmount')));
+    var err = document.getElementById('bidError');
+    if (!lot || lot.status !== 'open') { err.textContent = 'This artwork is no longer available.'; return; }
+    if (!(amount > 0)) { err.textContent = 'Enter a valid amount.'; return; }
+    if (activeKind === 'bid') {
+      if (Date.now() > lot.endsAt) { err.textContent = 'This auction has closed.'; return; }
+      var high = highestBid(lot.id);
+      var min = high ? high + 1 : lot.start;
+      if (amount < min) { err.textContent = 'Your bid must be at least ' + peso(min) + '.'; return; }
+    }
+    var offers = load(OFFERS_KEY);
+    offers.push({
+      id: 'o' + Date.now() + Math.floor(Math.random() * 1000),
+      lotId: lot.id,
+      lotTitle: lot.title,
+      kind: activeKind,
+      name: val('bidName'),
+      email: val('bidEmail').toLowerCase(),
+      amount: amount,
+      note: val('bidMessage'),
+      date: new Date().toISOString(),
+      status: 'pending',
+      counter: null
+    });
+    save(OFFERS_KEY, offers);
+    closeBid();
+    document.getElementById('auctionNote').textContent = (activeKind === 'bid' ? 'Your bid of ' : 'Your offer of ') + peso(amount) + ' on \u201C' + lot.title + '\u201D was sent. Use your email above to track its status.';
+    renderLots();
+  });
+
+  function renderLots() {
+    var grid = document.getElementById('lotGrid');
+    grid.innerHTML = '';
+    seedLots().forEach(function (lot) {
+      var card = el('article', 'lot-card');
+      card.setAttribute('role', 'listitem');
+      var left = lot.endsAt - Date.now();
+      var open = lot.status === 'open';
+      var high = highestBid(lot.id);
+      var count = bidsFor(lot.id).length;
+      card.appendChild(el('p', 'lot-medium', lot.medium));
+      card.appendChild(el('h3', '', lot.title));
+      card.appendChild(el('p', 'muted', lot.desc));
+      var stats = el('div', 'lot-stats');
+      var cur = el('div');
+      cur.appendChild(el('span', '', high ? 'Current bid ' : 'Starting bid '));
+      cur.appendChild(el('strong', '', peso(high || lot.start)));
+      stats.appendChild(cur);
+      stats.appendChild(el('span', '', count + (count === 1 ? ' bid' : ' bids') + ' \u2022 ' + (open ? timeLeft(left) : 'Sold')));
+      stats.appendChild(el('span', '', 'Artist\u2019s asking price ' + peso(lot.asking)));
+      card.appendChild(stats);
+      if (!open) card.appendChild(el('p', 'lot-status', 'Sold'));
+      var actions = el('div', 'lot-actions');
+      var bidBtn = el('button', 'btn btn-primary', 'Place bid');
+      bidBtn.type = 'button';
+      bidBtn.disabled = !open || left <= 0;
+      bidBtn.addEventListener('click', function () { openBid(lot.id, 'bid'); });
+      var offerBtn = el('button', 'btn btn-light', 'Make offer');
+      offerBtn.type = 'button';
+      offerBtn.disabled = !open;
+      offerBtn.addEventListener('click', function () { openBid(lot.id, 'offer'); });
+      actions.appendChild(bidBtn);
+      actions.appendChild(offerBtn);
+      card.appendChild(actions);
+      grid.appendChild(card);
+    });
+  }
+
+  var STATUS_TEXT = { pending: 'Awaiting artist', accepted: 'Accepted', rejected: 'Declined', countered: 'Counter-offer received' };
+
+  function setStatus(id, status, extra) {
+    var offers = load(OFFERS_KEY);
+    offers.forEach(function (o) {
+      if (o.id !== id) return;
+      o.status = status;
+      if (extra !== undefined) o.counter = extra;
+      if (status === 'accepted') {
+        var lots = seedLots();
+        lots.forEach(function (l) { if (l.id === o.lotId) l.status = 'sold'; });
+        save(LOTS_KEY, lots);
+      }
+    });
+    save(OFFERS_KEY, offers);
+  }
+
+  function refreshOffers() {
+    renderLots();
+    renderOffers();
+    renderTrack(currentTrackEmail);
+  }
+
+  function renderOffers() {
+    var box = document.getElementById('offerList');
+    if (!box) return;
+    box.innerHTML = '';
+    var list = load(OFFERS_KEY).slice().sort(function (a, b) { return new Date(b.date) - new Date(a.date); });
+    if (!list.length) {
+      box.appendChild(el('p', 'muted inbox-empty', 'No bids or offers yet.'));
+      return;
+    }
+    var ul = el('ul', 'inbox-list');
+    list.forEach(function (o) {
+      var li = el('li', 'inbox-item');
+      var head = document.createElement('header');
+      head.appendChild(el('span', 'inbox-badge', (o.kind === 'bid' ? 'Bid' : 'Offer') + ' \u2022 ' + STATUS_TEXT[o.status]));
+      head.appendChild(el('time', '', new Date(o.date).toLocaleString()));
+      li.appendChild(head);
+      addLine(li, 'Artwork', o.lotTitle);
+      addLine(li, 'Amount', peso(o.amount));
+      addLine(li, 'From', o.name + ' (' + o.email + ')');
+      addLine(li, 'Note', o.note);
+      if (o.status === 'countered' && o.counter) addLine(li, 'Your counter-offer', peso(o.counter));
+      if (o.status === 'pending') {
+        var acts = el('div', 'offer-actions');
+        var a = el('button', 'mini-btn accept', 'Accept');
+        var r = el('button', 'mini-btn reject', 'Decline');
+        var c = el('button', 'mini-btn', 'Counter');
+        [a, r, c].forEach(function (b) { b.type = 'button'; });
+        a.addEventListener('click', function () { setStatus(o.id, 'accepted'); refreshOffers(); });
+        r.addEventListener('click', function () { setStatus(o.id, 'rejected'); refreshOffers(); });
+        c.addEventListener('click', function () {
+          var v = window.prompt('Counter-offer amount (\u20B1):', String(o.amount));
+          if (v === null) return;
+          var n = Math.round(Number(v));
+          if (!(n > 0)) { alert('Enter a valid amount.'); return; }
+          setStatus(o.id, 'countered', n);
+          refreshOffers();
+        });
+        acts.appendChild(a); acts.appendChild(r); acts.appendChild(c);
+        li.appendChild(acts);
+      }
+      ul.appendChild(li);
+    });
+    box.appendChild(ul);
+  }
+
+  var currentTrackEmail = '';
+
+  function renderTrack(email) {
+    var box = document.getElementById('trackResults');
+    box.innerHTML = '';
+    if (!email) return;
+    var list = load(OFFERS_KEY).filter(function (o) { return o.email === email; })
+      .sort(function (a, b) { return new Date(b.date) - new Date(a.date); });
+    if (!list.length) {
+      box.appendChild(el('p', 'muted', 'No bids or offers found for that email.'));
+      return;
+    }
+    list.forEach(function (o) {
+      var row = el('div', 'offer-row');
+      row.appendChild(el('strong', '', o.lotTitle + ' \u2014 ' + (o.kind === 'bid' ? 'Bid ' : 'Offer ') + peso(o.amount)));
+      row.appendChild(el('span', '', STATUS_TEXT[o.status] + (o.status === 'countered' && o.counter ? ': ' + peso(o.counter) : '')));
+      if (o.status === 'countered') {
+        var acts = el('div', 'offer-actions');
+        var a = el('button', 'mini-btn accept', 'Accept counter-offer');
+        var r = el('button', 'mini-btn reject', 'Decline');
+        a.type = 'button'; r.type = 'button';
+        a.addEventListener('click', function () { setStatus(o.id, 'accepted'); refreshOffers(); });
+        r.addEventListener('click', function () { setStatus(o.id, 'rejected'); refreshOffers(); });
+        acts.appendChild(a); acts.appendChild(r);
+        row.appendChild(acts);
+      }
+      box.appendChild(row);
+    });
+  }
+
+  document.getElementById('trackForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    currentTrackEmail = val('trackEmail').toLowerCase();
+    renderTrack(currentTrackEmail);
+  });
+
+  var pages = {
+    home: ['home', 'occasions'],
+    shop: ['shop'],
+    auctions: ['auctions'],
+    custom: ['custom'],
+    about: ['about'],
+    reviews: ['reviews'],
+    contact: ['contact'],
+    manage: ['manage'],
+    inbox: ['inbox']
+  };
+
+  function route() {
+    var id = (location.hash || '#home').slice(1);
+    if (!pages[id] || ((id === 'manage' || id === 'inbox') && !isSeller())) id = 'home';
+    var shown = pages[id];
+    Object.keys(pages).forEach(function (key) {
+      pages[key].forEach(function (secId) {
+        var node = document.getElementById(secId);
+        if (node) node.classList.toggle('page-hidden', shown.indexOf(secId) === -1);
+      });
+    });
+    var links = document.querySelectorAll('#primaryNav a');
+    Array.prototype.forEach.call(links, function (a) {
+      if (a.getAttribute('href') === '#' + id) a.setAttribute('aria-current', 'page');
+      else a.removeAttribute('aria-current');
+    });
+    if (id === 'inbox') { renderInbox(); renderOffers(); }
+    if (id === 'auctions') renderLots();
+    window.scrollTo(0, 0);
+  }
+
+  function apply() {
+    var on = isSeller();
+    manage.style.display = on ? '' : 'none';
+    inbox.style.display = on ? '' : 'none';
+    inboxLink.style.display = on ? '' : 'none';
+    link.textContent = on ? 'My Artworks' : 'Seller Login';
+    logout.style.display = on ? '' : 'none';
+  }
+
+  link.addEventListener('click', function (e) {
+    if (isSeller()) return;
+    e.preventDefault();
+    var entered = window.prompt('Enter the seller passcode:');
+    if (entered === null) return;
+    if (entered === PASSCODE) {
+      sessionStorage.setItem(KEY, '1');
+      apply();
+      if (location.hash === '#manage') route();
+      else location.hash = '#manage';
+    } else {
+      alert('Incorrect passcode.');
+    }
+  });
+
+  logout.addEventListener('click', function () {
+    sessionStorage.removeItem(KEY);
+    apply();
+    if (location.hash === '#home' || !location.hash) route();
+  });
+
+  window.addEventListener('hashchange', route);
+
+  apply();
+  renderLots();
+  route();
+})();
+</script>
+</body>
+</html>
